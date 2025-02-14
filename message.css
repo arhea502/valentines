@@ -1,0 +1,167 @@
+@import url('https://fonts.cdnfonts.com/css/love-vale');
+
+/* General reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(135deg, #ff7b7b, #ffb3c1);
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Container */
+.container {
+    text-align: center;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    width: 90%; /* Adjust width for responsiveness */
+    max-width: 500px; /* Limit the max width for larger screens */
+    position: relative;
+    overflow: hidden;
+}
+
+/* Heart */
+.heart {
+    width: 120px;
+    height: 120px;
+    background-color: #ff4d6d;
+    position: relative;
+    margin: 0 auto 20px;
+    transform: rotate(45deg);
+    animation: bounce 1.5s ease-in-out infinite;
+}
+
+.heart:before, .heart:after {
+    content: "";
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #ff4d6d;
+}
+
+.heart:before {
+    top: -60px;
+    left: 0;
+}
+
+.heart:after {
+    left: 60px;
+    top: 0;
+}
+
+/* Message container */
+.message-container {
+    font-family: 'Love Vale', sans-serif;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    max-height: 250px; /* Restrict the height */
+    overflow-y: auto; /* Enable vertical scrolling if content exceeds */
+}
+
+.message-content {
+    font-family: 'Love Vale', sans-serif;
+    font-size: 50px;
+    letter-spacing: 3px;
+    font-weight: bold;
+    color: #800f2f;
+    margin-bottom: 20px;
+    line-height: 1.5;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Scrollable content */
+.message-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.message-container::-webkit-scrollbar-thumb {
+    background-color: #ff4d6d;
+    border-radius: 10px;
+}
+
+.message-container::-webkit-scrollbar-track {
+    background: #fff;
+}
+
+/* Button styling */
+.change-message {
+    padding: 12px 24px;
+    background-color: #ff4d6d;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.change-message:hover {
+    background-color: #ff2a47;
+    transform: scale(1.1);
+}
+
+/* Heart animation */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        width: 80%;
+        padding: 20px;
+    }
+
+    .heart {
+        width: 100px;
+        height: 100px;
+    }
+
+    .message-content {
+        font-size: 40px;
+    }
+
+    .change-message {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .heart {
+        width: 80px;
+        height: 80px;
+    }
+
+    .message-content {
+        font-size: 30px;
+    }
+
+    .change-message {
+        padding: 8px 18px;
+        font-size: 12px;
+    }
+}

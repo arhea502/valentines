@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Rope with Loading Animation</title>
+    <style>
+        html {
+            height: 100%;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            height: 100%;
+            --color: #f32183;
+            --bgColor: #424242;
+            color: var(--color);
+            background-color: var(--bgColor);
+        }
+
+        .wrapper {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url("https://images.unsplash.com/photo-1503455637927-730bce8583c0?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+            background-repeat: no-repeat;
+            background-size: cover;
+            overflow: hidden;
+        }
+
+        /* Heart Animation */
+        svg {
+            max-width: 600px;
+            margin: auto;
+            display: block;
+        }
+
+        svg * {
+            transform-box: fill-box;
+        }
+
+        .line {
+            fill: none;
+            stroke: #a08970;
+            stroke-miterlimit: 10;
+            stroke-width: 2px;
+            stroke-dasharray: 1920;
+            stroke-dashoffset: 1920;
+            animation: 3s line-draw cubic-bezier(.5, .3, .5, 1) forwards;
+        }
+
+        .heart {
+            fill: #fab4b4;
+            stroke-width: 0;
+            opacity: 0;
+            scale: .5;
+            transform-origin: 50% 50%;
+        }
+
+        .heart--is-large {
+            transform-origin: 25% 100%;
+            animation: 1s heart-grow 1.33s cubic-bezier(.5, .3, .1, 1) forwards;
+        }
+
+        .heart--is-small {
+            transform-origin: 4% 100%;
+            animation: .75s heart-grow 1.66s cubic-bezier(.3, .3,.2,1) forwards;
+        }
+
+        @keyframes line-draw {
+            100% { 
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes heart-grow {
+            100% { 
+                opacity: .5;
+                scale: 1;
+            }
+        }
+
+        /* Overlay to block content during loading */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Center the SVG within the overlay */
+        .overlay svg {
+            opacity: 1;
+            animation: fade-in 1s forwards;
+        }
+
+        @keyframes fade-in {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 831 509">
+            <path class="heart heart--is-small" d="M444.44,386.14c1.63-56.83,22.45-110.89,42.05-120.77,19.6-9.88,44.18.53,40.96,36.43,28.54-14.75,68.81-13.58,72.18,16.2,2.82,24.86-27.91,34.7-62.9,37.01-34.98,2.31-67.64,12.11-92.3,31.13Z"/>
+            <path class="heart heart--is-large" d="M441,401.62c-10.03-35.56-29.5-70.5-43-113s-8.18-96.55,20-98c18.22-.94,27.5,15.4,30,42,51.67-71.77,131.93-55.64,145.5-33.5,22.26,36.34-23.06,66.74-59.5,85.5-54.49,28.06-75.94,72.67-93,117Z"/>
+            <path class="line" d="M53.5,319.12c104.85-75.98,214.82-13.62,266,17,49.53,29.64,72.22,56.76,92,50,30.52-10.43-48.19-89.59-55-141-4.55-34.38,12.5-57.5,41-54s34.96,28.4,32,63c13.71-42.57,60.57-69.96,88-68,33.48,2.39,46.34,37.12,0,68-59.6,39.72-81.13,107.21-80,126-23.44-57.19-32.08-99.35-6.5-114.5,32.51-19.25,63.84,2.79,55,41,22.64-35.77,51.42-38.85,65-25,18.95,19.33-2.51,41.08-33,53-26.82,10.49-46.45,19.63-59,34,48.29-70.94,94.69-86.65,172-93,65.87-5.41,112.71,26.72,187,17"/>
+        </svg>
+
+        <div class="overlay">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 831 509">
+                <path class="heart heart--is-small" d="M444.44,386.14c1.63-56.83,22.45-110.89,42.05-120.77,19.6-9.88,44.18.53,40.96,36.43,28.54-14.75,68.81-13.58,72.18,16.2,2.82,24.86-27.91,34.7-62.9,37.01-34.98,2.31-67.64,12.11-92.3,31.13Z"/>
+                <path class="heart heart--is-large" d="M441,401.62c-10.03-35.56-29.5-70.5-43-113s-8.18-96.55,20-98c18.22-.94,27.5,15.4,30,42,51.67-71.77,131.93-55.64,145.5-33.5,22.26,36.34-23.06,66.74-59.5,85.5-54.49,28.06-75.94,72.67-93,117Z"/>
+                <path class="line" d="M53.5,319.12c104.85-75.98,214.82-13.62,266,17,49.53,29.64,72.22,56.76,92,50,30.52-10.43-48.19-89.59-55-141-4.55-34.38,12.5-57.5,41-54s34.96,28.4,32,63c13.71-42.57,60.57-69.96,88-68,33.48,2.39,46.34,37.12,0,68-59.6,39.72-81.13,107.21-80,126-23.44-57.19-32.08-99.35-6.5-114.5,32.51-19.25,63.84,2.79,55,41,22.64-35.77,51.42-38.85,65-25,18.95,19.33-2.51,41.08-33,53-26.82,10.49-46.45,19.63-59,34,48.29-70.94,94.69-86.65,172-93,65.87-5.41,112.71,26.72,187,17"/>
+            </svg>
+        </div>
+    </div>
+
+    <script>
+        let ropePullThreshold = 400; // Threshold to trigger animation and redirect
+        let currentPullLength = 0;
+
+        // Simulating rope pull
+        function simulateRopePull() {
+            if (currentPullLength >= ropePullThreshold) {
+                document.querySelector('.overlay').style.display = 'flex'; // Show overlay
+                setTimeout(() => {
+                    window.location.href = 'page.html'; // Redirect after animation
+                }, 3000); // Adjust time to match animation duration
+            } else {
+                currentPullLength += 10; // Simulate pulling the rope
+            }
+        }
+
+        // Trigger rope pull simulation every 50ms
+        setInterval(simulateRopePull, 50);
+    </script>
+</body>
+</html>

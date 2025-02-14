@@ -1,0 +1,185 @@
+/* General reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(135deg, #ff7b7b, #ffb3c1); /* Gradient background */
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Container */
+.container {
+    text-align: center;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    width: 90%; /* Adjust width to 90% */
+    max-width: 1200px; /* Limiting max-width */
+    position: relative;
+    overflow-y: auto; /* Enables vertical scrolling */
+    max-height: 80vh; /* Limiting the container height to 80% of the viewport */
+}
+
+/* Heart */
+.heart {
+    width: 120px;
+    height: 120px;
+    background-color: #ff4d6d;
+    position: relative;
+    margin: 0 auto 20px;
+    transform: rotate(45deg);
+    animation: bounce 1.5s ease-in-out infinite;
+}
+
+.heart:before, .heart:after {
+    content: "";
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #ff4d6d;
+}
+
+.heart:before {
+    top: -60px;
+    left: 0;
+}
+
+.heart:after {
+    left: 60px;
+    top: 0;
+}
+
+/* Profile Row */
+.profiles-row {
+    display: flex;
+    justify-content: space-around;
+    gap: 30px;
+    flex-wrap: wrap; /* Allows wrapping on smaller screens */
+}
+
+/* Individual Profile */
+.profile {
+    text-align: center;
+    max-width: 250px;
+    flex-grow: 1;
+}
+
+.profile a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.profile-img {
+    width: 100%;
+    height: 250px; /* Set a fixed height for all images */
+    object-fit: cover; /* Ensures the images cover the space without distortion */
+    border-radius: 8px;
+    margin-bottom: 15px;
+    filter: grayscale(100%); /* Default to grayscale */
+    transition: filter 0.3s ease-in-out; /* Smooth transition */
+    border: 4px solid #ff4d6d; /* Red frame */
+}
+
+/* On phone screens, keep color (no grayscale) */
+@media (max-width: 767px) {
+    .profile-img {
+        filter: grayscale(0%); /* Color by default */
+    }
+}
+
+/* Hover effect only on larger screens (computers) */
+@media (min-width: 768px) {
+    .profile-img:hover {
+        filter: grayscale(0%); /* Remove grayscale on hover for computers */
+    }
+}
+
+/* Profile Button */
+.profile-button {
+    padding: 12px 24px;
+    background-color: #ff4d6d;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-top: 10px;
+}
+
+.profile-button:hover {
+    background-color: #ff2a47;
+    transform: scale(1.1);
+}
+
+/* Button */
+.change-message {
+    padding: 12px 24px;
+    background-color: #ff4d6d;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.change-message:hover {
+    background-color: #ff2a47;
+    transform: scale(1.1);
+}
+
+/* Heart animation */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+/* Valentine’s themed effect for the <h3> titles */
+h3 {
+    position: relative;
+    font-size: 1.8em;
+    color: #ff4d6d;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Styling the span to create a fun Valentine's effect */
+.heart-span {
+    position: relative;
+    display: inline-block;
+    color: #ff4d6d; /* Heart-themed red color */
+    padding: 5px;
+    animation: heartBeat 1.5s ease-in-out infinite;
+    font-family: 'Arial', sans-serif;
+}
+
+h3:hover .heart-span {
+    color: #ff2a47; /* Slightly darker red on hover */
+    text-shadow: 0 0 15px rgba(255, 94, 94, 0.7), 0 0 30px rgba(255, 94, 94, 0.7); /* Glowing effect */
+}
+
+/* Heartbeat animation */
+@keyframes heartBeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2); /* Increase size in the middle of the animation */
+    }
+}
